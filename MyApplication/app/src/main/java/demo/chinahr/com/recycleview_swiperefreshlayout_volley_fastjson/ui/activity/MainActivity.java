@@ -17,24 +17,23 @@ import java.util.List;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.RefreshContract;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.DataList;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.Root;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presenter.RefreshPresenter;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.apapter.RecyclerViewAdapter;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemClickListener;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemLongClickListener;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.RequestType;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview.RecycleViewDivider;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview.LeftSlideDeleteRecyclerView;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview.RecyclerViewDivider;
 
 public class MainActivity extends AppCompatActivity implements OnRefreshListener, RefreshContract.View {
     SwipeRefreshLayout mSwipeRefreshWidget;
-    RecyclerView mRecyclerView;
+    LeftSlideDeleteRecyclerView mRecyclerView;
     LinearLayoutManager mLayoutManager;
     RecyclerViewAdapter adapter;
     int lastVisibleItem;
     List<DataList> list;
     int end = 20;
     RefreshPresenter presenter;
-    Root root;
 
 
     @Override
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
 
     public void initView() {
         mSwipeRefreshWidget = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
-        mRecyclerView = (RecyclerView) findViewById(android.R.id.list);
+        mRecyclerView = (LeftSlideDeleteRecyclerView) findViewById(android.R.id.list);
         mSwipeRefreshWidget.setOnRefreshListener(this);
         mSwipeRefreshWidget.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
@@ -58,15 +57,17 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(this));
+        mRecyclerView.addItemDecoration(new RecyclerViewDivider(this));
     }
+
     public void initData() {
         list = new ArrayList<DataList>();
         adapter = new RecyclerViewAdapter(list, this);
         mRecyclerView.setAdapter(adapter);
         presenter = createPresenter();
-        presenter.getHotestList(end=20, RequestType.FIRST);
+        presenter.getHotestList(end = 20, RequestType.FIRST);
     }
+
     public void initListener() {
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
                                              int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem +1== adapter.getItemCount()) {
+                        && lastVisibleItem + 1 == adapter.getItemCount()) {
                     boolean isRefreshing = mSwipeRefreshWidget.isRefreshing();
                     if (isRefreshing) {
                         adapter.notifyItemRemoved(adapter.getItemCount());
@@ -88,6 +89,23 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
+        mRecyclerView.setRemoveListener(new LeftSlideDeleteRecyclerView.RemoveListener() {
+
+            @Override
+            public void removeItem(LeftSlideDeleteRecyclerView.RemoveDirection direction, int position) {
+                switch (direction) {
+                    case LEFT:
+                        Toast.makeText(MainActivity.this, "左滑动删除" + adapter.list.get(position - 1).getName(), Toast.LENGTH_SHORT).show();
+                        adapter.list.remove(position - 1);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case RIGHT:
+                        Toast.makeText(MainActivity.this, "右滑" + adapter.list.get(position - 1).getName(), Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
             }
         });
         adapter.setOnItemClickListener(new NativeItemClickListener() {
@@ -105,11 +123,9 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
     }
 
 
-
-
     @Override
     public void onRefresh() {
-        presenter.getHotestList(end=20, RequestType.REFRESH);
+        presenter.getHotestList(end = 20, RequestType.REFRESH);
         mSwipeRefreshWidget.setRefreshing(false);
     }
 
@@ -120,29 +136,17 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
 
     @Override
     public void firstView() {
-        root = presenter.getRoot();
-        if(root!=null&&root.getData()!=null) {
-            adapter.list = root.getData().getList();
-            adapter.notifyDataSetChanged();
-        }
+        adapter.refresh(presenter.getRoot());
     }
 
     @Override
     public void loadView() {
-        root = presenter.getRoot();
-        if(root!=null&&root.getData()!=null) {
-            adapter.notifyItemRemoved(adapter.getItemCount());
-            adapter.list = root.getData().getList();
-            adapter.notifyDataSetChanged();
-        }
+        adapter.refresh(presenter.getRoot());
+
     }
 
     @Override
     public void refreshView() {
-        root = presenter.getRoot();
-        if(root!=null&&root.getData()!=null) {
-            adapter.list = root.getData().getList();
-            adapter.notifyDataSetChanged();
-        }
+        adapter.refresh(presenter.getRoot());
     }
 }

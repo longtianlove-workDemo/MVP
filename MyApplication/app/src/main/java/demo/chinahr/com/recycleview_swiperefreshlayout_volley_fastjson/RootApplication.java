@@ -3,8 +3,8 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson;
 import android.app.Application;
 import android.content.Context;
 
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.libhelper.ImageLoaderHelper;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.libhelper.PatchManagerHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ImageLoaderHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.PatchManagerHelper;
 
 /**
  * Created by 龙 on 2016/7/7.

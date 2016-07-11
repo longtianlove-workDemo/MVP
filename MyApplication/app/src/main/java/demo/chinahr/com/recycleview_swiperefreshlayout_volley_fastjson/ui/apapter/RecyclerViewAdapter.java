@@ -15,7 +15,8 @@ import java.util.List;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.DataList;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.libhelper.ImageLoaderHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ImageLoaderHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.Root;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemClickListener;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemLongClickListener;
 
@@ -60,7 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         false);
                 return new FootViewHolder(viewFooter);
             case TYPE_ITEM:
-                View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent,false);
+                View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
                 return new ItemViewHolder(viewItem, adpaterItemClickListener, adapterItemLongClickListener);
 
         }
@@ -108,6 +109,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Log.e("longtianlove", "点击头部");
                 }
             });
+        }
+    }
+
+    /**
+     * 刷新列表
+     *
+     * @param root
+     */
+    public void refresh(Root root) {
+        if (root != null && root.getData() != null) {
+            list = root.getData().getList();
+            notifyDataSetChanged();
         }
     }
 

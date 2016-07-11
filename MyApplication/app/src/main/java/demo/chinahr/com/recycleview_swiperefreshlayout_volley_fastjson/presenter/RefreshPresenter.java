@@ -7,11 +7,11 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.RefreshContract;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.HotestDataSource;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.HotestRemoteDataSource;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.Root;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.RequestType;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.libhelper.ParseJSONHelper;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.libhelper.RequestNetworkHelper;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.ResponseListener;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ParseJSONHelper;
 
 /**
  * Created by 龙 on 2016/7/7.
@@ -19,16 +19,19 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.list
 public class RefreshPresenter implements RefreshContract.Presenter {
     private Context context;
     private RefreshContract.View refreshView;
+    private HotestDataSource hotestDataSource;
     Root root;
 
     public RefreshPresenter(Context context, RefreshContract.View refreshView) {
         this.context = context;
         this.refreshView = refreshView;
+        hotestDataSource=new HotestRemoteDataSource();
     }
 
     @Override
     public void getHotestList(int end, final RequestType requestType) {
-        RequestNetworkHelper.getInstance(context).getHotestList(end, new ResponseListener() {
+        hotestDataSource.getHotestList(context,end,new HotestDataSource.ResponseCallback(){
+
             @Override
             public void onResponseOK(JSONObject jsonObject) {
                 String jsonString = jsonObject.toString();
