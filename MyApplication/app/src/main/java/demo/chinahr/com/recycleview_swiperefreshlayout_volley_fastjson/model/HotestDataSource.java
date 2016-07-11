@@ -5,6 +5,7 @@ import android.content.Context;
 import org.json.JSONObject;
 
 /**
+ * 获取数据
  * Created by 龙 on 2016/7/11.
  */
 public interface HotestDataSource {

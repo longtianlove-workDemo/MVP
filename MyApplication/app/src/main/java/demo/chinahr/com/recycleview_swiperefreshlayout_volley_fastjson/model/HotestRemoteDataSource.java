@@ -6,6 +6,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libh
 
 
 /**
+ * 从网络获取数据
  * Created by 龙 on 2016/7/11.
  */
 public class HotestRemoteDataSource implements HotestDataSource {
