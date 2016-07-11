@@ -11,8 +11,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.HotestDataSource;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.Constant;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.ResponseListener;
 
 /**
  * 封装第三方库，方便替换
@@ -36,11 +36,11 @@ public class RequestNetworkHelper {
 
     private RequestNetworkHelper() {
     }
-    public void getHotestList(int end, final ResponseListener responseListener){
+    public void getHotestList(int end, final HotestDataSource.ResponseCallback responseCallback){
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constant.HOTEST_LIST + "?end=" + end + "&from=1&groupid=1", null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                responseListener.onResponseOK(jsonObject);
+                responseCallback.onResponseOK(jsonObject);
             }
         }, new Response.ErrorListener() {
             @Override
