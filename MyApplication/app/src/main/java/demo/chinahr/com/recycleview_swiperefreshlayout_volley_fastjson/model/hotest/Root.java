@@ -1,7 +1,8 @@
-package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model;
+package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest;
 
 /**
- * Created by 58 on 2016/7/7.
+ * 实体
+ * Created by 龙 on 2016/7/7.
  */
 public class Root {
     private Status status;

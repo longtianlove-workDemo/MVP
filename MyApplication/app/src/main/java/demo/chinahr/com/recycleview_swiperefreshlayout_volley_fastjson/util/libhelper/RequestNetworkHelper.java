@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.HotestDataSource;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.HotestDataSource;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.Constant;
 
 /**

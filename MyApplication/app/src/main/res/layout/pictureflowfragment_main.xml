@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview.LeftSlideDeleteRecyclerView
-            android:id="@android:id/list"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:cacheColorHint="@null"

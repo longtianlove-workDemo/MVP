@@ -1,4 +1,4 @@
-package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model;
+package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest;
 
 import android.content.Context;
 
@@ -10,7 +10,7 @@ import org.json.JSONObject;
  */
 public interface HotestDataSource {
     interface ResponseCallback{
-        void onResponseOK(JSONObject jsonObject);
+        void onResponseOK(Object responseData);
         void onResponseError();
     }
     void getHotestList(Context context, int end, ResponseCallback callback);

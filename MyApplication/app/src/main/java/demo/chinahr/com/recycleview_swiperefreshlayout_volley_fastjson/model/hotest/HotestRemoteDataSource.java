@@ -1,4 +1,4 @@
-package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model;
+package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest;
 
 import android.content.Context;
 

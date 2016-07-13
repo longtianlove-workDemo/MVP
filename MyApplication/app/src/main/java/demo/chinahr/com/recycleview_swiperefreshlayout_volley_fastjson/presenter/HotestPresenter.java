@@ -6,23 +6,24 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.RefreshContract;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.HotestDataSource;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.HotestRemoteDataSource;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.Root;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.HotestContract;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.HotestDataSource;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.HotestRemoteDataSource;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.Root;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.RequestType;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ParseJSONHelper;
 
 /**
+ * 最热app的presenter
  * Created by 龙 on 2016/7/7.
  */
-public class RefreshPresenter implements RefreshContract.Presenter {
+public class HotestPresenter implements HotestContract.Presenter {
     private Context context;
-    private RefreshContract.View refreshView;
+    private HotestContract.View refreshView;
     private HotestDataSource hotestDataSource;
     Root root;
 
-    public RefreshPresenter(Context context, RefreshContract.View refreshView) {
+    public HotestPresenter(Context context, HotestContract.View refreshView) {
         this.context = context;
         this.refreshView = refreshView;
         hotestDataSource=new HotestRemoteDataSource();
@@ -33,11 +34,10 @@ public class RefreshPresenter implements RefreshContract.Presenter {
         hotestDataSource.getHotestList(context,end,new HotestDataSource.ResponseCallback(){
 
             @Override
-            public void onResponseOK(JSONObject jsonObject) {
+            public void onResponseOK(Object responseData) {
+                JSONObject jsonObject=(JSONObject)responseData;
                 String jsonString = jsonObject.toString();
-                root = new Root();
                 root = ParseJSONHelper.deserialize(jsonString, Root.class);
-                Log.e("longtianlove", root.getStatus().getCode() + "---code");
                 switch (requestType) {
                     case FIRST:
                         refreshView.firstView();

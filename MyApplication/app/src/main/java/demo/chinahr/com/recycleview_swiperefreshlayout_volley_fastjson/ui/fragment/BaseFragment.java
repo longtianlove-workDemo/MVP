@@ -25,7 +25,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = (BaseActivity) activity;
-
     }
 
 

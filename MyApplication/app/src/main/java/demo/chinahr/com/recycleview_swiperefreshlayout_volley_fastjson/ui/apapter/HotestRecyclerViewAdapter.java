@@ -14,16 +14,17 @@ import android.widget.Toast;
 import java.util.List;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.DataList;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.DataList;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.Check;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ImageLoaderHelper;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.Root;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.Root;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemClickListener;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemLongClickListener;
 
 /**
  * Created by 龙 on 2016/7/7.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HotestRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER = -1;
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
@@ -33,7 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     NativeItemClickListener adpaterItemClickListener;
     NativeItemLongClickListener adapterItemLongClickListener;
 
-    public RecyclerViewAdapter(List<DataList> list, Context context) {
+    public HotestRecyclerViewAdapter(List<DataList> list, Context context) {
         this.list = list;
         this.mcontext = context;
     }
@@ -53,15 +54,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
-                View viewHeader = LayoutInflater.from(mcontext).inflate(R.layout.item_header, parent,
+                View viewHeader = LayoutInflater.from(mcontext).inflate(R.layout.hotestfragment_item_header, parent,
                         false);
                 return new HeadViewHolder(viewHeader);
             case TYPE_FOOTER:
-                View viewFooter = LayoutInflater.from(mcontext).inflate(R.layout.item_foot, parent,
+                View viewFooter = LayoutInflater.from(mcontext).inflate(R.layout.hotestfragment_item_foot, parent,
                         false);
                 return new FootViewHolder(viewFooter);
             case TYPE_ITEM:
-                View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+                View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.hotestfragment_item, parent, false);
                 return new ItemViewHolder(viewItem, adpaterItemClickListener, adapterItemLongClickListener);
 
         }
@@ -72,17 +73,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ItemViewHolder) {
             final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            final DataList dl = list.get(position - 1);
-            if (dl != null) {
-                ImageLoaderHelper.getInstance().loadImage(dl.getIcon(), itemViewHolder.recycler_item_icon);
-                itemViewHolder.recycler_item_name.setText(dl.getName());
-                itemViewHolder.recycler_item_ratestar.setText(dl.getRatestar());
-                itemViewHolder.recycler_item_download.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mcontext, "正在下载" + list.get(position).getName() + "……", Toast.LENGTH_LONG).show();
-                    }
-                });
+            if(Check.indexOfList(list,position-1)) {
+                final DataList dl = list.get(position - 1);
+                if (dl != null) {
+                    ImageLoaderHelper.getInstance().loadImage(dl.getIcon(), itemViewHolder.recycler_item_icon);
+                    itemViewHolder.recycler_item_name.setText(dl.getName());
+                    itemViewHolder.recycler_item_ratestar.setText(dl.getRatestar());
+                    itemViewHolder.recycler_item_download.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mcontext, "正在下载" + list.get(position).getName() + "……", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         }
     }
@@ -97,7 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return list.isEmpty() ? 1 : list.size() + 2;
+        return list==null||list.isEmpty() ? 1 : list.size() + 2;
     }
 
     static class HeadViewHolder extends RecyclerView.ViewHolder {

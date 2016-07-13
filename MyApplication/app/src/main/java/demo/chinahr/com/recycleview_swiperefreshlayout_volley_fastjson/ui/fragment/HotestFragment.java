@@ -17,32 +17,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.RefreshContract;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.DataList;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presenter.RefreshPresenter;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.apapter.RecyclerViewAdapter;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.HotestContract;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.DataList;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presenter.HotestPresenter;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.apapter.HotestRecyclerViewAdapter;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.RequestType;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemClickListener;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.listener.NativeItemLongClickListener;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview.LeftSlideDeleteRecyclerView;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview.RecyclerViewDivider;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.widget.LeftSlideDeleteRecyclerView;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.widget.RecyclerViewDivider;
 
 /**
  * Created by 龙 on 2016/7/11.
  */
-public class HotestFragment extends BaseFragment<RefreshContract.Presenter> implements SwipeRefreshLayout.OnRefreshListener,RefreshContract.View{
+public class HotestFragment extends BaseFragment<HotestContract.Presenter> implements SwipeRefreshLayout.OnRefreshListener,HotestContract.View{
     private Context mcontext;
     SwipeRefreshLayout mSwipeRefreshWidget;
     LeftSlideDeleteRecyclerView mRecyclerView;
     LinearLayoutManager mLayoutManager;
-    RecyclerViewAdapter adapter;
+    HotestRecyclerViewAdapter adapter;
     int lastVisibleItem;
     List<DataList> list;
     int end = 20;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_main, container, false);
+        View view = inflater.inflate(R.layout.hotestfragment_main, container, false);
         initView(view);
         initData();
         initListener();
@@ -52,7 +52,7 @@ public class HotestFragment extends BaseFragment<RefreshContract.Presenter> impl
     public void initView(View view) {
         mcontext=getActivity();
         mSwipeRefreshWidget = (SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh_widget);
-        mRecyclerView = (LeftSlideDeleteRecyclerView) view.findViewById(android.R.id.list);
+        mRecyclerView = (LeftSlideDeleteRecyclerView) view.findViewById(R.id.list);
         mSwipeRefreshWidget.setOnRefreshListener(this);
         mSwipeRefreshWidget.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
@@ -66,7 +66,7 @@ public class HotestFragment extends BaseFragment<RefreshContract.Presenter> impl
 
     public void initData() {
         list = new ArrayList<DataList>();
-        adapter = new RecyclerViewAdapter(list, mcontext);
+        adapter = new HotestRecyclerViewAdapter(list, mcontext);
         mRecyclerView.setAdapter(adapter);
         presenter=createPresenter();
         presenter.getHotestList(end = 20, RequestType.FIRST);
@@ -134,8 +134,8 @@ public class HotestFragment extends BaseFragment<RefreshContract.Presenter> impl
     }
 
     @Override
-    public RefreshPresenter createPresenter() {
-        return new RefreshPresenter(mcontext, this);
+    public HotestPresenter createPresenter() {
+        return new HotestPresenter(mcontext, this);
     }
     @Override
     public void firstView() {

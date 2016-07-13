@@ -18,19 +18,22 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class ImageLoaderHelper {
     private static ImageLoaderHelper ourInstance = new ImageLoaderHelper();
+
     public static ImageLoaderHelper getInstance() {
         return ourInstance;
     }
 
     private ImageLoaderHelper() {
     }
-  public  void init(Context context){
+
+    public void init(Context context) {
         //创建默认的ImageLoader配置参数
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration
                 .createDefault(context);
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
     }
+
     public void loadImage(String url, final ImageView imageView) {
         ImageLoader.getInstance().loadImage(url, new ImageLoadingListener() {
 

@@ -1,4 +1,4 @@
-package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview;
+package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Scroller;

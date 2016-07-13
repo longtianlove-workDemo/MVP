@@ -1,4 +1,4 @@
-package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.selfview;
+package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
