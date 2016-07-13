@@ -12,6 +12,7 @@ import java.util.List;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.DataList;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.Root;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.Pics;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.Check;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ImageLoaderHelper;
 
@@ -19,10 +20,10 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libh
  * Created by 龙 on 2016/7/12.
  */
 public class PictureFlowRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public java.util.List<String> list;
+    public java.util.List<Pics> list;
     public Context mcontext;
 
-    public PictureFlowRecyclerViewAdapter(List<String> list, Context context) {
+    public PictureFlowRecyclerViewAdapter(List<Pics> list, Context context) {
         this.list = list;
         mcontext = context;
     }
@@ -30,7 +31,7 @@ public class PictureFlowRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     /**
      * 刷新列表
      */
-    public void refresh(List<String> pictureList) {
+    public void refresh(List<Pics> pictureList) {
         if (pictureList != null) {
             list = pictureList;
             notifyDataSetChanged();
@@ -48,7 +49,11 @@ public class PictureFlowRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
         if (holder instanceof ItemViewHolder) {
             final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             if (Check.indexOfList(list, position)) {
-                String pictureUrl = list.get(position);
+                String pictureUrl = list.get(position).getSmall();
+                ViewGroup.LayoutParams params = itemViewHolder.recycler_item_picture.getLayoutParams();
+                params.height = list.get(position).getImgheight();
+                params.width = list.get(position).getImgwidth();
+                itemViewHolder.recycler_item_picture.setLayoutParams(params);
                 ImageLoaderHelper.getInstance().loadImage(pictureUrl, itemViewHolder.recycler_item_picture);
             }
         }

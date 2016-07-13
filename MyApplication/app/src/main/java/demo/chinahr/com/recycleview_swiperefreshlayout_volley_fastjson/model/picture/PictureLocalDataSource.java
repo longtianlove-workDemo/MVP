@@ -1,5 +1,7 @@
 package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture;
 
+import android.content.Context;
+
 import java.util.Arrays;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.FileManager;
@@ -10,7 +12,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libh
  */
 public class PictureLocalDataSource implements PictureDataSource {
     @Override
-    public void getPictureUrls(PictureDataSource.ResponseCallback callback) {
+    public void getPictureUrls(Context context,int page,PictureDataSource.ResponseCallback callback) {
         FileManager.getInstance().getPictureUrls(callback);
     }
 }

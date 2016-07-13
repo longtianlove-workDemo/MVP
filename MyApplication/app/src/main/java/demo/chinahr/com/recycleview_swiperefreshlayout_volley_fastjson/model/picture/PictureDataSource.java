@@ -1,8 +1,8 @@
 package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture;
 
-import org.json.JSONObject;
+import android.content.Context;
 
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.HotestDataSource;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.DataSourceType;
 
 /**
  * 获取数据
@@ -10,8 +10,8 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hot
  */
 public interface PictureDataSource {
     interface ResponseCallback{
-        void onResponseOK(Object responseData);
+        void onResponseOK(Object responseData, DataSourceType dataType);
         void onResponseError();
     }
-  public  void getPictureUrls(PictureDataSource.ResponseCallback callback);
+  public  void getPictureUrls(Context context, int page, PictureDataSource.ResponseCallback callback);
 }

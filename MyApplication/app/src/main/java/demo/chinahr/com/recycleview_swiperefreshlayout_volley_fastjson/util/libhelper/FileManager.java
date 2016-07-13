@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.RootApplication;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.PictureDataSource;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.DataSourceType;
 
 /**
  * Created by 龙 on 2016/7/13.
@@ -39,7 +40,7 @@ public class FileManager {
             while ((url = bufferedReader.readLine()) != null) {
                 picturesList.add(url);
             }
-            callback.onResponseOK(picturesList);
+            callback.onResponseOK(picturesList, DataSourceType.LOCAL);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,13 +11,15 @@ import com.alipay.euler.andfix.patch.PatchManager;
 public class PatchManagerHelper {
     private static PatchManagerHelper ourInstance = new PatchManagerHelper();
     public static PatchManager mPatchManager;
+
     public static PatchManagerHelper getInstance() {
         return ourInstance;
     }
 
     private PatchManagerHelper() {
     }
-    public void init(Context context){
+
+    public void init(Context context) {
         // 初始化patch管理类
         mPatchManager = new PatchManager(context);
         // 初始化patch版本

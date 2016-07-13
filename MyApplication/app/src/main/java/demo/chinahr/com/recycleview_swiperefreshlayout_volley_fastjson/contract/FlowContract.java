@@ -2,6 +2,8 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract
 
 import java.util.List;
 
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.Pics;
+
 /**
  * Created by 龙 on 2016/7/12.
  */
@@ -11,7 +13,7 @@ public class FlowContract {
     }
 
     public interface Presenter extends BasePresenter {
-        public void getPictureUrls();
-        public List<String> getList();
+        public void getPictureUrls(int page);
+        public List<Pics> getList();
     }
 }
