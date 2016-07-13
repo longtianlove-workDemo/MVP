@@ -16,7 +16,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.cons
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ImageLoaderHelper;
 
 /**
- * Created by 58 on 2016/7/12.
+ * Created by 龙 on 2016/7/12.
  */
 public class PictureFlowRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public java.util.List<String> list;

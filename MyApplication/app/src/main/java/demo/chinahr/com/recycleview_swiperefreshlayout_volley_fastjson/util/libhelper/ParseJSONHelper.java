@@ -6,7 +6,7 @@ import com.alibaba.fastjson.TypeReference;
 import java.util.List;
 
 /**
- * 封装第三方库，方便替换
+ * json解析
  * Created by 龙 on 2016/7/7.
  */
 public class ParseJSONHelper {

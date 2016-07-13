@@ -15,7 +15,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hot
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.Constant;
 
 /**
- * 封装第三方库，方便替换
+ * 网络访问
  * Created by 龙 on 2016/7/8.
  */
 public class RequestNetworkHelper {

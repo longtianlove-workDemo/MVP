@@ -25,6 +25,7 @@ public class RootApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
         PatchManagerHelper.getInstance().init(this);
         ImageLoaderHelper.getInstance().init(this);
     }

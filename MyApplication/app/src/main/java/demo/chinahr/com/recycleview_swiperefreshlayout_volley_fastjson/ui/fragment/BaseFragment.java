@@ -15,7 +15,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.activity.BaseActivity;
 
 /**
- * Created by 58 on 2016/7/11.
+ * Created by 龙 on 2016/7/11.
  */
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView<T> {
     protected T presenter;

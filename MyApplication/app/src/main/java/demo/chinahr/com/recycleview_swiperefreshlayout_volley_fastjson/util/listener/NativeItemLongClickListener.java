@@ -3,7 +3,8 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.lis
 import android.view.View;
 
 /**
- * Created by 58 on 2016/7/8.
+ * 长按listener
+ * Created by 龙 on 2016/7/8.
  */
 public interface NativeItemLongClickListener {
     public void onItemLongClick(View view,int postion);

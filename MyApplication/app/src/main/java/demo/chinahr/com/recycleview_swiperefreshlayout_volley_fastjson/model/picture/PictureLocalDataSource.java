@@ -2,6 +2,8 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.pi
 
 import java.util.Arrays;
 
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.FileManager;
+
 /**
  * 从本地获取数据
  * Created by 龙 on 2016/7/12.
@@ -9,6 +11,6 @@ import java.util.Arrays;
 public class PictureLocalDataSource implements PictureDataSource {
     @Override
     public void getPictureUrls(PictureDataSource.ResponseCallback callback) {
-        callback.onResponseOK(Arrays.asList(Images.imageThumbUrls));
+        FileManager.getInstance().getPictureUrls(callback);
     }
 }

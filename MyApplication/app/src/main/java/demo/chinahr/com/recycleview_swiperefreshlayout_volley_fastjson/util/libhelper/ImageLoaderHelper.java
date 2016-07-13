@@ -12,7 +12,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 
 /**
- * 封装第三方库，方便替换
+ * 图片加载
  * Created by 龙 on 2016/7/8.
  */
 

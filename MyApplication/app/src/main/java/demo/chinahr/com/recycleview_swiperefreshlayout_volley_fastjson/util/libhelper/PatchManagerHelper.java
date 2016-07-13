@@ -5,7 +5,8 @@ import android.content.Context;
 import com.alipay.euler.andfix.patch.PatchManager;
 
 /**
- * Created by 58 on 2016/7/8.
+ * 热修复
+ * Created by 龙 on 2016/7/8.
  */
 public class PatchManagerHelper {
     private static PatchManagerHelper ourInstance = new PatchManagerHelper();
