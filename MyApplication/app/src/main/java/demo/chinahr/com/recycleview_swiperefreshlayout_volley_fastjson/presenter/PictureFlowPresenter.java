@@ -2,8 +2,6 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presente
 
 import android.content.Context;
 
-import org.json.JSONObject;
-
 import java.util.List;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.FlowContract;
@@ -32,20 +30,18 @@ public class PictureFlowPresenter implements FlowContract.Presenter {
     }
 
     public void getPictureUrls(int page) {
-        pictureDataSource.getPictureUrls(context,page,new PictureDataSource.ResponseCallback() {
+        pictureDataSource.getPictureUrls(context, page, new PictureDataSource.ResponseCallback() {
             @Override
             public void onResponseOK(Object responseData, DataSourceType dataType) {
-                switch (dataType){
+                switch (dataType) {
                     case LOCAL://本地加载数据
 //                        pictureList = (List<String>) responseData;
                         break;
-                    case REMOTE://网络加载数据
-                        JSONObject jsonObject=(JSONObject)responseData;
-                        String jsonString = jsonObject.toString();
+                    case REMOTE://网络
                         try {
-                            Root root= ParseJSONHelper.deserialize(jsonString, Root.class);
-                            pictureList=root.getPics();
-                        }catch (Exception e){
+                            Root root = ParseJSONHelper.deserialize((String) responseData, Root.class);
+                            pictureList = root.getPics();
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

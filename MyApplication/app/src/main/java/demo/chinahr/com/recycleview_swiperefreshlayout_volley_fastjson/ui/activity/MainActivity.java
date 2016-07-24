@@ -14,6 +14,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presenter
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.fragment.BaseFragment;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.fragment.HotestFragment;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.fragment.PictureFlowFragment;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.widget.DummyTabFactory;
 
 public class MainActivity extends BaseActivity<HotestPresenter> {
     TabHost tabHost;
@@ -47,26 +48,6 @@ public class MainActivity extends BaseActivity<HotestPresenter> {
                 .setContent(new DummyTabFactory(this)));
         tabHost.addTab(tabHost.newTabSpec("pictures").setIndicator("图片")//setIndicator 设置标签样式
                 .setContent(new DummyTabFactory(this))); //setContent 点击标签后触发
-
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.home_container, new HotestFragment());
-//        ft.commitAllowingStateLoss();
-    }
-
-    static class DummyTabFactory implements TabHost.TabContentFactory {
-        private Context mcontext;
-
-        public DummyTabFactory(Context context) {
-            this.mcontext = context;
-        }
-
-        @Override
-        public View createTabContent(String tag) {//创建宽高均为0的view
-            View v = new ImageView(mcontext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return v;
-        }
 
     }
 

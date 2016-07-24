@@ -10,6 +10,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.HotestDataSource;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.HotestRemoteDataSource;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.hotest.Root;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.DataSourceType;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.RequestType;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ParseJSONHelper;
 
@@ -34,10 +35,8 @@ public class HotestPresenter implements HotestContract.Presenter {
         hotestDataSource.getHotestList(context,end,new HotestDataSource.ResponseCallback(){
 
             @Override
-            public void onResponseOK(Object responseData) {
-                JSONObject jsonObject=(JSONObject)responseData;
-                String jsonString = jsonObject.toString();
-                root = ParseJSONHelper.deserialize(jsonString, Root.class);
+            public void onResponseOK(Object responseData, DataSourceType dataSourceType) {
+                root = ParseJSONHelper.deserialize((String) responseData, Root.class);
                 switch (requestType) {
                     case FIRST:
                         refreshView.firstView();

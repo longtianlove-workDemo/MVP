@@ -2,7 +2,7 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.ho
 
 import android.content.Context;
 
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.RequestNetworkHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.net.RequestNetworkHelper;
 
 
 /**
