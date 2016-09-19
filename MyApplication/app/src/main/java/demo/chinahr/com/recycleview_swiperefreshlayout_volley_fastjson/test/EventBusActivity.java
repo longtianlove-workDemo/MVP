@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
 
 /**
@@ -14,6 +16,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
 public class EventBusActivity extends Activity {
     TextView tv_sendMsg;
     TextView tv_showMsg;
+    static int i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +25,9 @@ public class EventBusActivity extends Activity {
         initListener();
         initData();
     }
-
     private void initData() {
         EventBus.getDefault().register(this);
     }
-
-
     private void initView() {
         tv_sendMsg= (TextView) this.findViewById(R.id.tv_sendMsg);
         tv_showMsg= (TextView) this.findViewById(R.id.tv_showMsg);
@@ -37,11 +37,11 @@ public class EventBusActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new Event.clickEvent("哈哈哈"));
+                EventBus.getDefault().post(new Event.clickEvent("哈哈哈"+i++));
             }
         });
     }
-
+    @Subscribe(threadMode = ThreadMode.MainThread)
     public void onEventMainThread(Event.clickEvent event)
     {
         tv_showMsg.setText(event.msg);
@@ -49,10 +49,6 @@ public class EventBusActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         EventBus.getDefault().unregister(this);
     }
-
-
-
 }
