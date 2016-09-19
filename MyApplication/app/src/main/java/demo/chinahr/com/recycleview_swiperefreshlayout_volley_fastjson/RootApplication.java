@@ -2,6 +2,7 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ImageLoaderHelper;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.PatchManagerHelper;
@@ -20,6 +21,7 @@ public class RootApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     @Override
