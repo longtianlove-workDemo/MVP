@@ -15,6 +15,7 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.
  * Created by 58 on 2016/7/11.
  */
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity  {
+    protected T presenter;
     private FrameLayout contentView;
 
     @Override

@@ -4,6 +4,6 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.con
  * Created by 龙 on 2016/7/7.
  */
 public class Constant {
-    public static final String HOTEST_LIST = "http://api.app.i.sogou.com/list/";
-    public static final String PICTURE_URL_LIST = "http://m.meishubaby.com/pictures/";
+    public static final String HOTEST_LIST = "http://api.app.i.sogou.com/list/hotest";
+    public static final String PICTURE_URL_LIST = "http://m.meishubaby.com/pictures/item2";
 }

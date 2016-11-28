@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Scroller;
@@ -99,9 +98,8 @@ public class LeftSlideDeleteRecyclerView extends RecyclerView {
                     .getDefaultDisplay().getHeight();
         }
         scroller = new Scroller(context);
-//        final Resources res = context.getResources();
-//        mTouchSlop = res.getDimensionPixelSize(R.dimen.slide_recyclerview_TouchSlop);
-        mTouchSlop= ViewConfiguration.get(context).getScaledTouchSlop();
+        final Resources res = context.getResources();
+        mTouchSlop = res.getDimensionPixelSize(R.dimen.slide_recyclerview_TouchSlop);
     }
 
     /**

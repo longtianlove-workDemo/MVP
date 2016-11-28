@@ -2,7 +2,7 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.pi
 
 import android.content.Context;
 
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.net.RequestNetworkHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.RequestNetworkHelper;
 
 /**
  * Created by 58 on 2016/7/13.
@@ -10,6 +10,6 @@ import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libh
 public class PictureRemoteDataSource implements PictureDataSource {
     @Override
     public void getPictureUrls(Context context, int page, ResponseCallback callback) {
-        RequestNetworkHelper.getInstance(context).getPictureUrls(page = 1, callback,true);
+        RequestNetworkHelper.getInstance(context).getPictureUrls(page = 1, callback);
     }
 }

@@ -103,8 +103,7 @@ public class HotestFragment extends BaseFragment<HotestContract.Presenter> imple
                     case LEFT:
                         Toast.makeText(mcontext, "左滑动删除" + adapter.list.get(position - 1).getName(), Toast.LENGTH_SHORT).show();
                         adapter.list.remove(position - 1);
-                        adapter.notifyItemRemoved(position);
-//                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                         break;
                     case RIGHT:
                         Toast.makeText(mcontext, "右滑" + adapter.list.get(position - 1).getName(), Toast.LENGTH_SHORT).show();
