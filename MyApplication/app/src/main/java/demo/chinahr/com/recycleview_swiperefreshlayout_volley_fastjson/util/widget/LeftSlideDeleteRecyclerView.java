@@ -99,7 +99,7 @@ public class LeftSlideDeleteRecyclerView extends RecyclerView {
         }
         scroller = new Scroller(context);
         final Resources res = context.getResources();
-        mTouchSlop = res.getDimensionPixelSize(R.dimen.slide_recyclerview_TouchSlop);
+        mTouchSlop=res.getDimensionPixelSize(R.dimen.slide_recyclerview_TouchSlop);
     }
 
     /**
@@ -246,7 +246,7 @@ public class LeftSlideDeleteRecyclerView extends RecyclerView {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (isSlide && slidePosition != AdapterView.INVALID_POSITION
-                && slidePosition != 0
+                && slidePosition !=0
                 && itemView != null) {
             requestDisallowInterceptTouchEvent(true);
             addVelocityTracker(ev);

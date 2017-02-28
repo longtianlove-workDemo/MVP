@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name=".RootApplication"
         android:allowBackup="true"
@@ -12,8 +10,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+<<<<<<< HEAD
         <activity android:name=".test.TestActivity"
             android:screenOrientation="portrait">
+=======
+        <activity android:name=".ui.activity.MainActivity">
+>>>>>>> parent of cbfc8c2... 备份
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

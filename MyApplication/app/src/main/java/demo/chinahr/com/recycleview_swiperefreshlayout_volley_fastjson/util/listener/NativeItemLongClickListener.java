@@ -7,5 +7,5 @@ import android.view.View;
  * Created by 龙 on 2016/7/8.
  */
 public interface NativeItemLongClickListener {
-    public void onItemLongClick(View view, int postion);
+    public void onItemLongClick(View view,int postion);
 }

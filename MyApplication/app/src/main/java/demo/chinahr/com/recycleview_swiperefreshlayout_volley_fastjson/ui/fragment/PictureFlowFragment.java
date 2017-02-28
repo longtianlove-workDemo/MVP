@@ -17,22 +17,18 @@ import java.util.List;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.R;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.FlowContract;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.Pics;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presenter.PictureFlowPresenter;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.ui.apapter.PictureFlowRecyclerViewAdapter;
 
 /**
  * Created by 58 on 2016/7/12.
  */
-public class PictureFlowFragment extends BaseFragment<FlowContract.Presenter> implements SwipeRefreshLayout.OnRefreshListener, FlowContract.View {
+public class PictureFlowFragment extends BaseFragment<FlowContract.Presenter> implements SwipeRefreshLayout.OnRefreshListener,FlowContract.View {
     SwipeRefreshLayout mSwipeRefreshWidget;
-    StaggeredGridLayoutManager layoutManager;
     private Context mcontext;
     RecyclerView mRecyclerView;
     PictureFlowRecyclerViewAdapter adapter;
-    List<Pics> list;
-    int page;
-
+    List<String> list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,31 +39,29 @@ public class PictureFlowFragment extends BaseFragment<FlowContract.Presenter> im
     }
 
     void initView(View view) {
-        mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
+        mSwipeRefreshWidget = (SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh_widget);
         mSwipeRefreshWidget.setOnRefreshListener(this);
         mSwipeRefreshWidget.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
                         .getDisplayMetrics()));
-        mcontext = getActivity();
+        mcontext=getActivity();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
 //        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-//        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
     }
 
     void initData() {
-        list = new ArrayList<Pics>();
-        adapter = new PictureFlowRecyclerViewAdapter(list, mcontext);
+        list = new ArrayList<String>();
+        adapter=new PictureFlowRecyclerViewAdapter(list,mcontext);
         mRecyclerView.setAdapter(adapter);
-        presenter = createPresenter();
-        presenter.getPictureUrls(page = 1);
+        presenter=createPresenter();
+        presenter.getPictureUrls();
     }
 
     @Override
     public FlowContract.Presenter createPresenter() {
-        return new PictureFlowPresenter(mcontext, this);
+        return new PictureFlowPresenter(mcontext,this);
     }
 
     @Override
@@ -77,7 +71,7 @@ public class PictureFlowFragment extends BaseFragment<FlowContract.Presenter> im
 
     @Override
     public void onRefresh() {
-        presenter.getPictureUrls(page = 1);
+        presenter.getPictureUrls();
         mSwipeRefreshWidget.setRefreshing(false);
     }
 }

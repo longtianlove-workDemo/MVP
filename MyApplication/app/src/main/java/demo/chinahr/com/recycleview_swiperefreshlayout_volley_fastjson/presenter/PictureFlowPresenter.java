@@ -2,17 +2,11 @@ package demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.presente
 
 import android.content.Context;
 
-import org.json.JSONObject;
-
 import java.util.List;
 
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.contract.FlowContract;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.Pics;
 import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.PictureDataSource;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.PictureRemoteDataSource;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.Root;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.constant.DataSourceType;
-import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.util.libhelper.ParseJSONHelper;
+import demo.chinahr.com.recycleview_swiperefreshlayout_volley_fastjson.model.picture.PictureLocalDataSource;
 
 /**
  * 展示图片的presenter
@@ -22,35 +16,20 @@ public class PictureFlowPresenter implements FlowContract.Presenter {
     private Context context;
     PictureDataSource pictureDataSource;
     FlowContract.View pictureFlowView;
-    List<Pics> pictureList;
+    List<String> pictureList;
 
     public PictureFlowPresenter(Context context, FlowContract.View pictureFlowView) {
         this.context = context;
-        this.pictureDataSource = new PictureRemoteDataSource();
+        this.pictureDataSource = new PictureLocalDataSource();
         this.pictureFlowView = pictureFlowView;
 
     }
 
-    public void getPictureUrls(int page) {
-        pictureDataSource.getPictureUrls(context,page,new PictureDataSource.ResponseCallback() {
+    public void getPictureUrls() {
+        pictureDataSource.getPictureUrls(new PictureDataSource.ResponseCallback() {
             @Override
-            public void onResponseOK(Object responseData, DataSourceType dataType) {
-                switch (dataType){
-                    case LOCAL://本地加载数据
-//                        pictureList = (List<String>) responseData;
-                        break;
-                    case REMOTE://网络加载数据
-                        JSONObject jsonObject=(JSONObject)responseData;
-                        String jsonString = jsonObject.toString();
-                        try {
-                            Root root= ParseJSONHelper.deserialize(jsonString, Root.class);
-                            pictureList=root.getPics();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-                }
-
+            public void onResponseOK(Object responseData) {
+                pictureList = (List<String>) responseData;
                 pictureFlowView.showPictures();
             }
 
@@ -62,7 +41,7 @@ public class PictureFlowPresenter implements FlowContract.Presenter {
     }
 
     @Override
-    public List<Pics> getList() {
+    public List<String> getList() {
         return pictureList;
     }
 

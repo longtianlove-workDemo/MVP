@@ -7,10 +7,7 @@ import java.util.List;
  * Created by 龙 on 2016/7/12.
  */
 public class Check {
-    public static boolean indexOfList(List list, int position) {
-        if((list==null||list.get(position)==null)){
-            return false;
-        }
-        return list.size() > position;
+    public static boolean indexOfList(List list,int position){
+        return list.size()>position;
     }
 }
